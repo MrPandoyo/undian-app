@@ -23,6 +23,9 @@
                                 Press "SPACEBAR" to start and finish the roll
                             </div>
                             <div class="col-md-6 text-right">
+                                <span th:if="${#strings.equalsIgnoreCase(params.category,'FIVE_KM')}">Kategori 5 Kilometer</span>
+                                <span th:if="${#strings.equalsIgnoreCase(params.category,'TEN_KM')}">Kategori 10 Kilometer</span>
+                                <span th:if="${#strings.equalsIgnoreCase(params.category,'TWENTY_NINE_KM')}">Kategori 29 Kilometer</span>
                                 <a th:if="${!#strings.equalsIgnoreCase(params.category,'FIVE_KM')}" th:href="@{/undian(category='FIVE_KM')}" class="btn btn-primary m-l-20 waves-effect waves-light">
                                     Undi 5KM
                                 </a>
@@ -49,13 +52,13 @@
             <div class="col-md-12 text-center p-t-20">
                 <img th:src="@{/assets/images/Logo-RunForWater2021.png}" alt="" style="max-height: 250px">
             </div>
-            <div class="col-md-12 text-center p-t-20">
-                <span style="font-weight: bold; font-size: 7rem;" id="textKategori">
-                    <span th:if="${#strings.equalsIgnoreCase(params.category,'FIVE_KM')}">Kategori 5 Kilometer</span>
-                    <span th:if="${#strings.equalsIgnoreCase(params.category,'TEN_KM')}">Kategori 10 Kilometer</span>
-                    <span th:if="${#strings.equalsIgnoreCase(params.category,'TWENTY_NINE_KM')}">Kategori 29 Kilometer</span>
-                </span>
-            </div>
+            <!--<div class="col-md-12 text-center p-t-20">-->
+                <!--<span style="font-weight: bold; font-size: 7rem;" id="textKategori">-->
+                    <!--<span th:if="${#strings.equalsIgnoreCase(params.category,'FIVE_KM')}">Kategori 5 Kilometer</span>-->
+                    <!--<span th:if="${#strings.equalsIgnoreCase(params.category,'TEN_KM')}">Kategori 10 Kilometer</span>-->
+                    <!--<span th:if="${#strings.equalsIgnoreCase(params.category,'TWENTY_NINE_KM')}">Kategori 29 Kilometer</span>-->
+                <!--</span>-->
+            <!--</div>-->
             <div class="col-md-10 col-md-offset-1 text-center" th:if="${undian == null}" style="background: #4899d4; margin-top: 30px; padding-top: 25px;">
                 <div class="row">
                     <img th:src="@{/assets/images/counter.gif}" alt="" style="max-width: 100%; display: none;" id="counter">
