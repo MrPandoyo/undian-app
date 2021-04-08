@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="activeTab='PESERTA'">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Form Bank</title>
+    </head>
+    <body>
+        <div layout:fragment="content" style="display: flow-root;">
+            <!-- Content Header (Page header) -->
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Peserta</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                    <ol class="breadcrumb">
+                        <li>Peserta</li>
+                        <li class="active">Import</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12 col-lg-9" >
+                        <form th:action="@{/peserta/import}" method="post" enctype="multipart/form-data">
+                            <div class="white-box">
+                                <h3 class="box-title">Import Form</h3>
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <label>Category <span class="text-danger">*</span></label>
+                                        <select name="category" class="form-control" required>
+                                            <option value="FIVE_KM">5K</option>
+                                            <option value="TEN_KM">10K</option>
+                                            <option value="TWENTY_NINE_KM">29K</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label>File <span class="text-danger">*</span></label>
+                                        <input type="file" name="fileCsv" class="form-control" required>
+                                    </div>
+                                    <div class="box-footer">
+                                        <div class="pull-left">
+                                            <h5 class="text-danger">
+                                                <strong>* Required</strong>
+                                            </h5>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a th:href="@{/peserta/list}" class="btn btn-default">Back</a>
+                                            <button type="submit" class="btn btn-primary" title="Import">Import</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+        <div layout:fragment="customJavascript">
+            <script type="text/javascript" th:inline="javascript"></script>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div th:fragment="javascript">
+
+            <script th:src="@{/assets/plugins/bower_components/jquery/dist/jquery.min.js}"></script>
+            <!-- Bootstrap Core JavaScript -->
+            <script th:src="@{/assets/bootstrap/dist/js/bootstrap.min.js}"></script>
+            <!-- Menu Plugin JavaScript -->
+            <script th:src="@{/assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js}"></script>
+            <!--slimscroll JavaScript -->
+            <script th:src="@{/assets/js/jquery.slimscroll.js}"></script>
+            <!--Wave Effects -->
+            <script th:src="@{/assets/js/waves.js}"></script>
+            <!-- Custom Theme JavaScript -->
+            <script th:src="@{/assets/js/custom.min.js}"></script>
+            <!--Style Switcher -->
+            <script th:src="@{/assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js}"></script>
+
+            <script th:src="@{/assets/plugins/bower_components/sweetalert/sweetalert.min.js}"></script>
+
+            <script>
+                var baseUrl = "[[@{/}]]";
+            </script>
+        </div>
+    </body>
+</html>

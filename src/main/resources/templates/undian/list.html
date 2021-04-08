@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Undian</title>
+        <div th:include="fragments/head :: head" th:remove="tag">Head</div>
+        <link th:href='@{/assets/css/monsterrat.css}' rel='stylesheet'>
+        <style>
+            body{
+                font-family: 'Montserrat'!important;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="formSearch" th:action="@{/undian}" th:object="${params}">
+            <input type="hidden" id="winner" th:value="${params.value}">
+            <input type="hidden" th:field="*{category}">
+            <div class="row">
+                <div class="panel panel-default" style="margin-bottom: 0px;">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <div class="col-md-6">
+                                Press "SPACEBAR" to start and finish the roll
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a th:if="${!#strings.equalsIgnoreCase(params.category,'FIVE_KM')}" th:href="@{/undian(category='FIVE_KM')}" class="btn btn-primary m-l-20 waves-effect waves-light">
+                                    Undi 5KM
+                                </a>
+                                <a th:if="${!#strings.equalsIgnoreCase(params.category,'TEN_KM')}" th:href="@{/undian(category='TEN_KM')}" class="btn btn-primary m-l-20 waves-effect waves-light">
+                                    Undi 10KM
+                                </a>
+                                <a th:if="${!#strings.equalsIgnoreCase(params.category,'TWENTY_NINE_KM')}" th:href="@{/undian(category='TWENTY_NINE_KM')}" class="btn btn-primary m-l-20 waves-effect waves-light">
+                                    Undi 29KM
+                                </a>
+                                <button th:disabled="${undian == null}" type="submit" class="btn btn-info m-l-20 waves-effect waves-light">
+                                    <span class="fa fa-refresh"></span> Undi Lagi
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <div class="row printableArea" th:styleappend="'background:url(' + @{/assets/images/BG.jpg} + '); background-size: cover;'" style="height: 1080px;">
+            <!--<div class="col-md-12 text-center" >-->
+                <!--<img th:src="@{/assets/images/Logo-Supported.png}" alt="" style="max-height: 100%">-->
+            <!--</div>-->
+            <div class="col-md-12 text-center p-t-20">
+                <img th:src="@{/assets/images/Logo-RunForWater2021.png}" alt="" style="max-height: 250px">
+            </div>
+            <div class="col-md-12 text-center p-t-20">
+                <span style="font-weight: bold; font-size: 7rem;" id="textKategori">
+                    <span th:if="${#strings.equalsIgnoreCase(params.category,'FIVE_KM')}">Kategori 5 Kilometer</span>
+                    <span th:if="${#strings.equalsIgnoreCase(params.category,'TEN_KM')}">Kategori 10 Kilometer</span>
+                    <span th:if="${#strings.equalsIgnoreCase(params.category,'TWENTY_NINE_KM')}">Kategori 29 Kilometer</span>
+                </span>
+            </div>
+            <div class="col-md-10 col-md-offset-1 text-center" th:if="${undian == null}" style="background: #4899d4; margin-top: 30px; padding-top: 25px;">
+                <div class="row">
+                    <img th:src="@{/assets/images/counter.gif}" alt="" style="max-width: 100%; display: none;" id="counter">
+                    <div class="col-md-12" style="background: #4899d4; height: 306px; vertical-align: middle;" id="undianBox">
+                        <div class="white-box" style="background: #4899d4; color: white!important;">
+                            <div class="row">
+                                <div class="col-md-12" style="padding-top: 40px;">
+                                    <span style="font-weight: bold; font-size: 10rem;color: oldlace;">PENGUNDIAN DOORPRIZE</span>
+                                    <a disabled th:href="@{/undian/undi(category = ${params.category})}" id="undian" hidden></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${undian != null}" class="col-md-10 col-md-offset-1 text-center" style="background: #4899d4; margin-top: 30px; padding-top: 25px;">
+                <div class="row">
+                    <div class="col-md-12" style="background: #4899d4; height: 306px; vertical-align: middle;">
+                        <div class="white-box" style="background: #4899d4; color: white!important;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span th:text="${undian.winner.bbib}" style="font-size: 10rem;font-weight: bold"></span>
+                                    <br>
+                                    <span th:text="${undian.winner.getFullName()}" style="font-size: 7rem;font-weight: bolder; white-space: nowrap;">Johnathan Doe</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="fragments/javascript :: javascript" th:remove="tag">Javascript</div>
+        <script>
+            $(document).ready(function () {
+                $("#category").on("change",function () {
+                    $("#formSearch").submit();
+                });
+
+                var winner = $("#winner").val();
+                if(winner != ""){
+                    var successAudio = new Audio(baseUrl+"assets/audio/success.mp3");
+                    successAudio.play();
+                }
+
+                var link = $("#undian").attr("href");
+                var firstClick = true;
+
+                $(window).keypress(function(e) {
+                    if (e.key === ' ' || e.key === 'Spacebar') {
+                        e.preventDefault();
+                        console.log("firstclick = "+firstClick);
+                        if(firstClick){
+                            firstClick = false;
+                            go();
+                        }else{
+                            window.location.href = link;
+                        }
+                    }
+                });
+
+                function go() {
+                    $("#undianBox").hide();
+                    $("#counter").show();
+
+                    var drumAudio = new Audio(baseUrl+"assets/audio/drum.mp3");
+
+                    drumAudio.play();
+                    drumAudio.addEventListener('ended', function() {
+                        this.currentTime = 0;
+                        this.play();
+                    }, false);
+                }
+
+            });
+        </script>
+    </body>
+</html>

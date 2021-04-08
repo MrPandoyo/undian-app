@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <div th:include="fragments/head :: head" th:remove="tag">Head</div>
+        <div layout:fragment="customCss" th:remove="tag"></div>
+        <style>
+            .brandlogo-image {
+                width: 35px;
+                height: 35px;
+            }
+            input[type="number"]::-webkit-outer-spin-button,
+            input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            input[type="number"] {
+                -moz-appearance: textfield;
+            }
+        </style>
+    </head>
+    <body style="height: auto; min-height: 100%; zoom: 1;">
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+        </svg>
+    </div>
+        <div id="wrapper" style="height: auto; min-height: 100%;">
+            <div th:include="fragments/header :: header" th:remove="tag">Header</div>
+            <div th:include="fragments/sidebar :: sidebar" th:remove="tag">Sidebar</div>
+            <div id="page-wrapper">
+                <div class="alert alert-danger alert-dismissible" th:if="${errorMessage}">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                    <span th:text="${errorMessage}"></span>
+                </div>
+                <div class="alert alert-success alert-dismissible" th:if="${successMessage}">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> Success!</h4>
+                    <span th:text="${successMessage}"></span>
+                </div>
+                <div class="container-fluid">
+                    <div layout:fragment="content" th:remove="tag"></div>
+                </div>
+            </div>
+            <div th:include="fragments/footer :: footer" th:remove="tag">Footer</div>
+            <div th:include="fragments/javascript :: javascript" th:remove="tag">Javascript</div>
+            <div layout:fragment="customJavascript" th:remove="tag"></div>
+        </div>
+    </body>
+</html>

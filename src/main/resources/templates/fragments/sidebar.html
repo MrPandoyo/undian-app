@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <body>
+        <!-- Left side column. contains the sidebar -->
+        <div th:fragment="sidebar">
+            <div class="navbar-default sidebar" role="navigation" style="position: absolute;">
+                <div class="sidebar-nav slimscrollsidebar">
+                    <div class="sidebar-head">
+                        <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="#!" class="waves-effect" onclick="javascript:window.location='/'" th:class="${activeTab == 'HOME'} ? 'active' : null">
+                                <i class="mdi mdi-view-dashboard fa-fw"></i>
+                                <span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" th:href="@{/peserta}"
+                               th:class="${activeTab == 'PESERTA'} ? 'active' : null">
+                                <span class="hide-menu">
+                                    <i class="mdi mdi-account-star fa-fw"></i>
+                                    Peserta
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" th:href="@{/history}"
+                               th:class="${activeTab == 'HISTORY'} ? 'active' : null">
+                                <span class="hide-menu">
+                                    <i class="mdi mdi-history fa-fw"></i>
+                                    History Pemenang Undian
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" th:href="@{/undian(category='FIVE_KM')}" target="_blank"
+                               th:class="${activeTab == 'UNDIAN'} ? 'active' : null">
+                                <span class="hide-menu">
+                                    <i class="mdi mdi-trophy fa-fw"></i>
+                                    Undian 5KM
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" th:href="@{/undian(category='TEN_KM')}" target="_blank"
+                               th:class="${activeTab == 'UNDIAN'} ? 'active' : null">
+                                <span class="hide-menu">
+                                    <i class="mdi mdi-trophy fa-fw"></i>
+                                    Undian 10KM
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" th:href="@{/undian(category='TWENTY_NINE_KM')}" target="_blank"
+                               th:class="${activeTab == 'UNDIAN'} ? 'active' : null">
+                                <span class="hide-menu">
+                                    <i class="mdi mdi-trophy fa-fw"></i>
+                                    Undian 29KM
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
